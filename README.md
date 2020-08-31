@@ -8,8 +8,6 @@ Start playing by clicking [here!](https://pccisme.github.io/pig-game/)
 
 ### Game Rules
 
-GAME RULES:
-
 1. The game has 2 players, playing in rounds
 
 2. In each turn, a player rolls a dice as many times as he whishes. Each result get added to his ROUND score
