@@ -9,8 +9,8 @@ GAME RULES:
 
 */
 
-var score, roundScore, activePlayer, gamePlaying;
-
+var scores, roundScore, activePlayer, gamePlaying, lastRoll, goal;
+goal = 100;
 init();
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
@@ -19,13 +19,23 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         var diceDOM = document.querySelector('.dice');
         diceDOM.style.display = 'block';
         diceDOM.src = 'dice-' + dice + '.png';
-    
-        if (dice !== 1) {
-            roundScore += dice;
-            document.querySelector('#current-' + activePlayer).textContent = roundScore;
-        } else {
+
+        if (lastRoll == 6 && dice == 6) {
+            console.log(lastRoll);
+            console.log(dice);
+            document.getElementById('score-' + activePlayer).textContent = '0';
+            document.getElementById('current-' + activePlayer).textContent = '0';
+            scores[activePlayer] = 0;
             nextPlayer();
+        } else {
+            if (dice !== 1) {
+                roundScore += dice;
+                document.querySelector('#current-' + activePlayer).textContent = roundScore;
+            } else {
+                nextPlayer();
+            }
         }
+        lastRoll = dice;
     }
 });
 
@@ -33,7 +43,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     if (gamePlaying) {
         scores[activePlayer] += roundScore;
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-        if (scores[activePlayer] >= 20) {
+        if (scores[activePlayer] >= goal) {
             document.getElementById('name-' + activePlayer).textContent = 'Winner!';
             document.querySelector('.dice').style.display = 'none';
             document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
@@ -65,6 +75,7 @@ function init() {
     roundScore = 0;
     activePlayer = 0;
     gamePlaying = true;
+    lastRoll = 0;
     document.querySelector('.dice').style.display = 'none';
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
@@ -77,4 +88,8 @@ function init() {
     document.querySelector('.player-0-panel').classList.remove('active');
     document.querySelector('.player-1-panel').classList.remove('active');
     document.querySelector('.player-0-panel').classList.add('active');
+}
+
+function setGoal() {
+    goal = document.getElementById("goal").value;
 }
