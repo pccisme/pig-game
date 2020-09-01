@@ -4,9 +4,9 @@
 
 Created the pig game with HTML, CSS, and JavaScript. I was building this little game to review DOM manipulation and events.
 
-### Game Rules
+Start playing by clicking [here!](https://pccisme.github.io/pig-game/)
 
-GAME RULES:
+### Game Rules
 
 1. The game has 2 players, playing in rounds
 
